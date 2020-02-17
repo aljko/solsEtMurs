@@ -1,0 +1,19 @@
+$primary: darken(#428bca, 20%);
+$second : green;
+
+@import "~bootstrap/scss/bootstrap";
+
+.lorem {
+  color: $primary;
+  margin : 25vh;
+}
+
+.grandeIntro {
+  height : 10%;
+
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
