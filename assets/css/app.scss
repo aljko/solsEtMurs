@@ -5,15 +5,19 @@ $second : green;
 
 .lorem {
   color: $primary;
-  margin : 25vh;
+  margin : 15%;
 }
 
 .grandeIntro {
   height : 10%;
-
 }
 
 .sticky {
   position: sticky;
   top: 0;
+}
+
+.connex {
+  position: absolute;
+  right: 0%;
 }
