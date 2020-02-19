@@ -34,6 +34,32 @@
 {% endblock %}
 {% block content %}
 
+    <h1>L'actualité</h1>
+
+        {% for article in articles %}
+            <div class="article">
+
+                <h2>{{ article.title }}</h2>
+                {{ article.date ? article.date|date('d-m-Y') : '' }}
+                {{ article.contents }}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('article_show', {'id': article.id}) }}">Voir l'article</a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}">Editer l'article</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('article_new') }}">Create new</a>
+    {% endif %}
+
     <div class="lorem">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem
         egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor
