@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Article
      * @ORM\Column(type="integer", nullable=true)
      */
     private $ordre;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Pic", mappedBy="article")
+     */
+    private $pic;
+
+    public function __construct()
+    {
+        $this->pic = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +97,37 @@ class Article
     public function setOrdre(?int $ordre): self
     {
         $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pic[]
+     */
+    public function getPic(): Collection
+    {
+        return $this->pic;
+    }
+
+    public function addPic(Pic $pic): self
+    {
+        if (!$this->pic->contains($pic)) {
+            $this->pic[] = $pic;
+            $pic->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removePic(Pic $pic): self
+    {
+        if ($this->pic->contains($pic)) {
+            $this->pic->removeElement($pic);
+            // set the owning side to null (unless already changed)
+            if ($pic->getArticle() === $this) {
+                $pic->setArticle(null);
+            }
+        }
 
         return $this;
     }
