@@ -7,6 +7,7 @@ use App\Entity\Article;
 use App\Entity\Pic;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\PicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,10 +21,11 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository, PicRepository $picRepository): Response
     {
         return $this->render('Home/index.html.twig', [
             'articles' => $articleRepository->findAll(),
+
         ]);
     }
 }

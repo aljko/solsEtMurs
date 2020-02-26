@@ -2,15 +2,24 @@
 
 {% for article in articles %}
     <div class="article">
-
-        <h2>{{ article.title }}</h2>
-        {{ article.date ? article.date|date('d-m-Y') : '' }}
-        {{ article.contents }}
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <a class="fonctionAdmin" href="{{ path('article_show', {'id': article.id}) }}">Voir l'article, </a>
-            <a class="fonctionAdmin" href="{{ path('article_edit', {'id': article.id}) }}">Editer l'article</a>
-        {% endif %}
+        <h2><strong>{{ article.title }}</strong></h2>
+        <div class="contenuArticle">
+            <div>
+                {{ article.date ? article.date|date('d-m-Y') : '' }}
+                {{ article.contents }}
+                {% for pics in article.pic %}
+            </div>
+            <div>
+                <img class="photoArticle" src="{{ pics.location }}" alt=" {{ pics.alt }}" />
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="fonctionAdmin" href="{{ path('article_show', {'id': article.id}) }}">Voir l'article, </a>
+                <a class="fonctionAdmin" href="{{ path('article_edit', {'id': article.id}) }}">Editer l'article</a>
+            {% endif %}
+        </div>
     </div>
 {% else %}
     Pas d'article

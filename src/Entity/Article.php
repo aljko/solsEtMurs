@@ -39,7 +39,7 @@ class Article
     private $ordre;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Pic", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\Pic", mappedBy="article" )
      */
     private $pic;
 
