@@ -1,30 +1,25 @@
 <h1>L'actualité</h1>
-
-{% for article in articles %}
-    <div class="article">
-        <h2><strong>{{ article.title }}</strong></h2>
-        <div class="contenuArticle">
-            <div>
+<div class="articles">
+    {% for article in articles %}
+        <div class="article">
+            <div class="contenuArticle">
+                <h2><strong>{{ article.title }}</strong></h2>
                 {{ article.date ? article.date|date('d-m-Y') : '' }}
                 {{ article.contents }}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="fonctionAdmin" href="{{ path('article_show', {'id': article.id}) }}">Voir l'article, </a>
+                    <a class="fonctionAdmin" href="{{ path('article_edit', {'id': article.id}) }}">Editer l'article</a>
+                {% endif %}
+            </div>
+            <div class="photoArticle">
                 {% for pics in article.pic %}
+                    <img class="photoArticle" src="{{ pics.location }}" alt=" {{ pics.alt }}" />
+                {% endfor %}
             </div>
-            <div>
-                <img class="photoArticle" src="{{ pics.location }}" alt=" {{ pics.alt }}" />
-            </div>
-            {% endfor %}
         </div>
-        <div>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a class="fonctionAdmin" href="{{ path('article_show', {'id': article.id}) }}">Voir l'article, </a>
-                <a class="fonctionAdmin" href="{{ path('article_edit', {'id': article.id}) }}">Editer l'article</a>
-            {% endif %}
-        </div>
-    </div>
-{% else %}
-    Pas d'article
-{% endfor %}
-<div class="article">
+    {% else %}
+        Pas d'article
+    {% endfor %}
     {% if is_granted('ROLE_ADMIN') %}
         <a class="fonctionAdmin" href="{{ path('article_new') }}">Créer un nouvel article</a>
     {% endif %}

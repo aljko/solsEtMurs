@@ -3,28 +3,33 @@ $second : green;
 
 @import "~bootstrap/scss/bootstrap";
 
-.contenuArticle {
+.articles {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
 }
 
 .article {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center ;
+  margin: 1%;
+}
+
+.contenuArticle {
   color: $primary;
   text-align: justify;
   text-justify: inter-word;
-  margin-left : 15%;
-  margin-right: 15%;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  min-width: 350px;
+  max-width: 700px;
 }
 
 .photoArticle {
-  margin-left: 5%;
-  max-width: 50%;
-  height: auto;
+  min-width: 350px;
+  max-width: 800px;
+  margin-left: 2%;
+
 }
 
 .grandeIntro {
